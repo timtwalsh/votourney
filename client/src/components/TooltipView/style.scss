@@ -1,0 +1,39 @@
+.gameTooltip {
+  position: fixed;
+  display: block;
+  background: lightskyblue;
+  z-index: 3;
+  width: 15em;
+  color: black;
+  opacity: 1;
+  border: 1px solid black;
+  padding: 0;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-align: center;
+}
+.gameTooltip .layout {
+  display: flex;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+.gameTooltip .name {
+  overflow: hidden;
+  background: #223344;
+  color: #fff;
+  padding: .5em;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+.gameTooltip .details {
+  background: #445566;
+  color: #fff;
+  padding: .25em;
+  height: 20%;
+  overflow: hidden;
+}
+.gameTooltip .details:nth-child(3n) {
+  background: #334455;
+  color: #fff;
+}

@@ -1,0 +1,70 @@
+.container {
+  width: 100%;
+  min-width: 18em;
+}
+
+.tournament-bracket {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+
+  @media only screen and (max-width: 700px) {
+    flex-direction: column;
+  }
+}
+
+.tournament-nav {
+  display: block;
+  margin: .5em;
+  padding: .5em;
+  @media only screen and (max-width: 700px) {
+    display: block;
+    width: 95vw;
+    padding: 5px;
+    margin: 0;
+  }
+}
+
+.startButton {
+  @media only screen and (max-width: 700px) {
+  }
+}
+
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  padding: 5px 0.75em;
+  margin: 1px;
+  @media only screen and (max-width: 700px) {
+    display: block;
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.btn-primary {
+  color: #ddeeff;
+  background-color: #33aaff;
+  border-color: #33aaff;
+
+  &:hover {
+    color: #ffffff;
+    background-color: #1188ff;
+    border-color: #1188ff;
+  }
+}

@@ -1,0 +1,178 @@
+.match-section {
+  position: relative;
+  border: 2px solid RGBA(0, 0, 0, 0.75);
+  width: 100%;
+  font-family: 'Roboto Condensed', sans-serif;
+  background: #334455;
+
+  @media only screen and (min-width: 700px) {
+    &::after { // Line top previous game, team 1
+      position: absolute;
+      right: -1.25em;
+      bottom: 40%;
+      content: '';
+      width: 1.2em;
+      height: 50%;
+      padding: 0;
+      margin: 0;
+      border-bottom-right-radius: .5em;
+      border-right: 5px solid black;
+      border-bottom: 5px solid black;
+    }
+
+    &::before { // Line top previous game, team 1
+      position: absolute;
+      right: -1.25em;
+      top: 49%;
+      content: '';
+      width: 1.2em;
+      height: 40%;
+      padding: 0;
+      margin: 0;
+      border-top-right-radius: .5em;
+      border-right: 5px solid black;
+      border-top: 5px solid black;
+    }
+  }
+    :nth-child(3n) {
+      background: #445566;
+    }
+}
+.participants {
+  //display: flex;
+  //flex-direction: column;
+  //align-items: flex-end;
+  //flex: 0 1 auto;
+  cursor: default;
+  overflow: hidden;
+
+  @media only screen and (min-width: 700px) {
+    &::after { // Line to feeder game, team 1
+      position: absolute;
+      display: block;
+      left: -1.3em;
+      top: 49%;
+      content: '';
+      width: 1.3em;
+      height: 51%;
+      padding: 0;
+      margin: 0;
+      border-left: 5px solid black;
+      border-top: 5px solid black;
+      border-top-left-radius: .5em;
+    }
+
+    &::before { // Line to feeder game, team 2
+      position: absolute;
+      display: block;
+      left: -1.3em;
+      bottom: 49%;
+      content: '';
+      width: 1.3em;
+      height: 51%;
+      border-left: 5px solid black;
+      border-bottom: 5px solid black;
+      border-bottom-left-radius: .5em;
+    }
+  }
+}
+
+// .participants :before and :after height * nth to fix overlap issues
+.match-section:nth-child(odd):not(:first-child) {
+  &::before {
+    top: 48.5%;
+  }
+}
+
+
+.round:first-child { // Hide feeder lines for games with none
+  .round-container {
+    .match-section {
+      .participants {
+        &::before,
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.match-section:nth-child(odd) {
+  &::after {
+    display: none;
+  }
+}
+
+.match-section:nth-child(even) {
+  &::before {
+    display: none;
+  }
+}
+
+.round:last-child {
+  .round-container {
+    .match-section {
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+.participant-vote-button {
+  background: #2a2a2a;
+  font-size: 1em;
+  padding: 0;
+  margin: 0.25em 4px;
+  width: 2.5em;
+  min-width: 2.5em;
+  height: 2.5em;
+  min-height: 2.5em;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.participant-vote {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 5;
+}
+
+.participant-score {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.participant-vote-indicator {
+  position: relative;
+  left: -0.5em;
+  bottom: 2.25em;
+  font-size: .75em;
+}
+
+.vs {
+  font-size: 0.75em;
+  background: #2a2a2a;
+  color: white;
+  width: 1.75em;
+  height: 1.75em;
+  position: absolute;
+  border-radius: .33em;
+  border: 1px solid #33afff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 40%;
+  right: -.75em;
+  z-index: 1;
+}

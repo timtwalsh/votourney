@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,700&family=Roboto:wght@100;300;400;700;900&display=swap');
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: white;
+  background: #333;
+}
+.app-canvas {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+  align-items: center;
+ }
