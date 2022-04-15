@@ -86,7 +86,7 @@ async function createVoteRecord(bracketId) {
         const getData = await db_connect.collection("bracket_vote").findOne({id: bracketId});
         if (getData == null) {
             const dbInsert = await db_connect.collection("bracket_vote").insertOne(dataObject);
-            if (dbInsert.result.n == 1) {
+            if (dbInsert.result.n === 1) {
                 return true;
             }
         } else {
@@ -114,7 +114,7 @@ routes.route("/api/bracket").post(async (req, res) => {
                     // insert record
                     let db_connect = dbo.getDb();
                     const dbInsert = await db_connect.collection("bracket_data").insertOne(dataObject);
-                    if (dbInsert.result.n == 1) {
+                    if (dbInsert.result.n === 1) {
                         await createVoteRecord(bracketId)
                             .then(
                                 res.status(201).send(bracketId)
@@ -136,6 +136,5 @@ routes.route("/api/bracket").post(async (req, res) => {
         res.sendStatus(400)
     }
 });
-
 
 module.exports = routes;

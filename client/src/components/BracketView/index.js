@@ -4,6 +4,7 @@ import RoundSection from "../RoundView";
 import {useParams} from "react-router-dom";
 import Cookies from "universal-cookie";
 import * as React from "react";
+import Navbar from "../NavBar";
 
 const cookies = new Cookies();
 const apiBaseAddress = process.env.REACT_APP_BASE_API_URL;
@@ -29,7 +30,7 @@ const BracketView = () => {
             })
             const data = await getBracketData.json();
             updateBracketData(data[0].bracket)
-            if (data[0].admin == cookies.get('userId')) setAdmin(data[0].admin)
+            if (data[0].admin === cookies.get('userId')) setAdmin(data[0].admin)
             const getStartingRound = await fetch(`${apiBaseAddress}/voting/round/${bracketId}`, {
                 method: "GET",
             })
@@ -57,21 +58,23 @@ const BracketView = () => {
         const updatedRound = await setNextRound.text();
         setCurrentRound(String(updatedRound))
     }
-
+    console.log(rounds)
     const tourneyNav = document.createElement("li");
     tourneyNav.className = "tourney-nav-items";
     const navButton = () => {
-        return (<div className="tournament-nav">
+        return (<>
+            <Navbar/>
+            <div className="tournament-nav">
             <input
                 type="button"
-                value={currentRound == -1 ? "Start Tournament" : (currentRound == rounds.length-1 ? "End Tournament" : "Next Round")}
+                value={currentRound === -1 ? "Start Tournament" : (currentRound === rounds.length-1 ? "End Tournament" : "Next Round")}
                 className="btn btn-primary"
                 id="startRound"
                 onClick={() => {
                     handleNextRound()
                 }}
             />
-        </div>)
+        </div></>)
     }
 
     // Keep the data up to date

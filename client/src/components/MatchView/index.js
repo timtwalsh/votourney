@@ -39,24 +39,24 @@ const MatchView = (props) => {
     };
 
     const voteForParticipant = (vote) => {
-        if (props.votingRound == props.roundId) {
+        if (props.votingRound === props.roundId) {
             castVote(props.bracketId, props.roundId, props.matchId, vote)
         }
     }
-
+    console.log(props);
     return (
         <div className="match-section">
             <div className="participants">
                 {props.matchParticipants && props.matchParticipants.top ? (
                     <ParticipantView
                         participant={props.matchParticipants ? props.matchParticipants.top.participant : emptyTeam}>
-                        {props.votingRound == props.roundId && props.matchParticipants.top.participant.name == "" ? (<div className="participant-bye"></div>) : (<>
+                        {props.votingRound === props.roundId && props.matchParticipants.top.participant.name === "" ? (<div className="participant-bye"/>) : (<>
                             <div className="participant-vote-button" onClick={() => voteForParticipant("top")}>
                                 {vote != null ? (<div
                                     className="participant-score">{props.matchParticipants ? props.matchParticipants.top.voters.length : 0}</div>) : (<>
-                                    {props.votingRound == props.roundId ?
+                                    {props.votingRound === props.roundId ?
                                         <div className="participant-vote">🔷</div> : ""}</>)}
-                                {vote == "top" ? <div className="participant-vote-indicator">🔷</div> : ""}
+                                {vote === "top" ? <div className="participant-vote-indicator">🔷</div> : ""}
                             </div>
                         </>)}
                     </ParticipantView>
@@ -67,14 +67,14 @@ const MatchView = (props) => {
                 {props.matchParticipants && props.matchParticipants.bottom ? (
                     <ParticipantView
                         participant={props.matchParticipants ? props.matchParticipants.bottom.participant : emptyTeam}>
-                        {props.votingRound == props.roundId && props.matchParticipants.bottom.participant.name == "" ? "" : (
+                        {props.votingRound === props.roundId && props.matchParticipants.bottom.participant.name === "" ? "" : (
                             <>
                                 <div className="participant-vote-button" onClick={() => voteForParticipant("bottom")}>
                                     {vote != null ? (<div
                                         className="participant-score">{props.matchParticipants ? props.matchParticipants.bottom.voters.length : 0}</div>) : (<>
-                                        {props.votingRound == props.roundId ?
+                                        {props.votingRound === props.roundId ?
                                             <div className="participant-vote">🔷</div> : ""}</>)}
-                                    {vote == "bottom" ? <div className="participant-vote-indicator">🔷</div> : ""}
+                                    {vote === "bottom" ? <div className="participant-vote-indicator">🔷</div> : ""}
                                 </div>
                             </>)}
                     </ParticipantView>) : ""}

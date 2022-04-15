@@ -1,7 +1,6 @@
 import * as React from "react";
 import './style.scss'
 import {Route, Routes} from "react-router-dom";
-import Navbar from "./components/NavBar";
 import NewBracket from "./components/NewBracket";
 import BracketView from "./components/BracketView";
 import Cookies from 'universal-cookie';
@@ -26,7 +25,6 @@ const App = () => {
 
     return (
         <div className="app-canvas">
-            <Navbar/>
             <Routes>
                 <Route path="/bracket/new" element={<NewBracket/>}/>
                 <Route path="/bracket/view/:bracketId" element={<BracketView/>}/>
