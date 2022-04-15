@@ -5,7 +5,7 @@ const lodash = require("lodash");
 const dbo = require("../db/conn");
 
 
-routes.route("/bracket/:bracketId").get(async (req, res) => {
+routes.route("/api/bracket/:bracketId").get(async (req, res) => {
     try {
         const bracketId = req.params.bracketId;
         let db_connect = dbo.getDb();
@@ -19,7 +19,7 @@ routes.route("/bracket/:bracketId").get(async (req, res) => {
     }
 });
 
-routes.route("/bracket").get(async (req, res) => {
+routes.route("/api/bracket").get(async (req, res) => {
     try {
         res.status(400).send(`Error: GET supports specific id only: bracket/bracketId - eg. bracket/123xxxxxxxxxxxxxxxxxxx24`)
     } catch (e) {
@@ -27,7 +27,7 @@ routes.route("/bracket").get(async (req, res) => {
     }
 });
 
-routes.route("/brackets").get(async (req, res) => {
+routes.route("/api/brackets").get(async (req, res) => {
     try {
         let db_connect = dbo.getDb();
         const dbGetCursor = await db_connect.collection("bracket_data").find({}, {_id: 0});
@@ -98,7 +98,7 @@ async function createVoteRecord(bracketId) {
 
 }
 
-routes.route("/bracket").post(async (req, res) => {
+routes.route("/api/bracket").post(async (req, res) => {
     try {
         if (req.body) {
             if (req.body.participants && req.body.userId) {

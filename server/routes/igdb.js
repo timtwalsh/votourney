@@ -6,7 +6,7 @@ const axios = require("axios");
 const twitchBearerUrl = `https://id.twitch.tv/oauth2/token?client_id=${process.env.TWITCH_CLIENT_ID}&client_secret=${process.env.TWITCH_CLIENT_SECRET}&grant_type=client_credentials`;
 
 
-routes.route("/game/search/:lookup").get(async (req, res) => {
+routes.route("/api/game/search/:lookup").get(async (req, res) => {
     const {data} = await axios.post(twitchBearerUrl);
     const response = await igdb(process.env.TWITCH_CLIENT_ID, data.access_token)
         .fields('name, platforms, first_release_date, genres')

@@ -9,7 +9,7 @@ const routes = express.Router();
 
 const dbo = require("../db/conn");
 
-routes.route("/voting/create/:bracketId").post(async (req, res) => {
+routes.route("/api/voting/create/:bracketId").post(async (req, res) => {
     try {
         const bracketId = req.params.bracketId;
         let dataObject = {id: bracketId, round: -1}
@@ -29,7 +29,7 @@ routes.route("/voting/create/:bracketId").post(async (req, res) => {
     }
 });
 
-routes.route("/voting/:bracketId").post(async (req, res) => {
+routes.route("/api/voting/:bracketId").post(async (req, res) => {
     const bracketId = req.params.bracketId;
     try {
         const roundId = req.body.roundId;
@@ -55,7 +55,7 @@ routes.route("/voting/:bracketId").post(async (req, res) => {
 });
 
 
-routes.route("/voting/round/:bracketId").get(async (req, res) => {
+routes.route("/api/voting/round/:bracketId").get(async (req, res) => {
     try {
         const bracketId = req.params.bracketId;
         let db_connect = dbo.getDb();
@@ -67,7 +67,7 @@ routes.route("/voting/round/:bracketId").get(async (req, res) => {
     }
 });
 
-routes.route("/voting/round/:bracketId").post(async (req, res) => {
+routes.route("/api/voting/round/:bracketId").post(async (req, res) => {
     try {
         const bracketId = req.params.bracketId;
         let newRound = req.body.round;
