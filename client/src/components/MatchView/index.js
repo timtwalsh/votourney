@@ -22,7 +22,6 @@ const MatchView = (props) => {
             vote: vote,
             userId: cookies.get('userId')
         }
-        console.log(voteData)
         const response = await fetch(`${apiBaseAddress}/voting/${bracketId}`, {
             method: 'POST',
             headers: {
@@ -32,10 +31,8 @@ const MatchView = (props) => {
             body: JSON.stringify(voteData)
         })
         const data = await response.json();
-        console.log("___VOTE_RESPONSE___");
-        setVote(vote)
-        props.updateHook(data)
-        console.log(data);
+        setVote(vote);
+        props.updateHook(data);
     };
 
     const voteForParticipant = (vote) => {
@@ -43,7 +40,6 @@ const MatchView = (props) => {
             castVote(props.bracketId, props.roundId, props.matchId, vote)
         }
     }
-    console.log(props);
     return (
         <div className="match-section">
             <div className="participants">

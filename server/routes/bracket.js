@@ -126,7 +126,6 @@ routes.route("/api/bracket").post(async (req, res) => {
                     res.status(400).send("Not enough participants, must have at least 2 participants");
                 }
             } else {
-                console.log(req.body);
                 res.status(400).send(`No participant data received: ${Object.keys(req.body)}`)
             }
         } else {

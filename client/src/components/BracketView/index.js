@@ -58,7 +58,6 @@ const BracketView = () => {
         const updatedRound = await setNextRound.text();
         setCurrentRound(String(updatedRound))
     }
-    console.log(rounds)
     const tourneyNav = document.createElement("li");
     tourneyNav.className = "tourney-nav-items";
     const navButton = () => {

@@ -5,8 +5,6 @@ import TooltipView from "../TooltipView";
 
 const ParticipantView = (props) => {
     const [displayTooltip, setDisplayTooltip] = useState(false)
-    console.log('participant')
-    console.log(props)
     if (props.participant)
         return (
         <div className="participant">

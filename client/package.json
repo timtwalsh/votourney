@@ -40,9 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.181",
-    "@types/styled-components": "^5.1.24"
   }
 }
