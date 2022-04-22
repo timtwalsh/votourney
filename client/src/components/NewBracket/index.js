@@ -15,12 +15,13 @@ const NewBracket = () => {
     const [isSearching, setIsSearching] = useState(false);
     const [isManual, setIsManual] = useState(false);
     const defaultSearchValue = '';
-    const handleSelectResult = (data, row) => {
+
+    const handleSelectResult = async (data, row) => {
         setIsSearching(false)
         let rowData = [...rows];
-        if (data.platforms == "") data.platforms = "PC or Mobile"
+        if (data.genres !== "" && data.year !== "" && data.platforms === "") data.platforms = "PC or Mobile"
         rowData[row] = data;
-        setRows(rowData);
+        await setRows(rowData);
     }
 
     const inputSearchProps = {
@@ -30,17 +31,14 @@ const NewBracket = () => {
         handleSelectResult,
     }
 
-    const handleChange = (i, event) => {
-        if (!isManual) {
-            _.assign(rows[i], event);
-            setRows([...rows]);
-        } else {
-            // Manual Input override
-        }
+    const handleChange = async (i, event) => {
+        let rowData = [...rows];
+        _.assign(rowData[i], event);
+        await setRows(rowData);
     }
 
     const addClick = () => {
-        setRows([...rows, emptyRow]);
+        setRows([...rows, _.cloneDeep(emptyRow)]);
     }
 
     const handleSubmit = async () => {
@@ -55,16 +53,13 @@ const NewBracket = () => {
 
         if (response.status >= 200 && response.status <= 201) {
             const id = await response.text();
-            // alert(id);
             window.location.href = `/bracket/view/${id.replaceAll(`"`, ``)}`;
         } else
             alert(await response.text());
     };
 
     const handleDeleteRow = async (i) => {
-        console.log(rows);
-        const newRows = await _.filter(rows, (row, n) => n != i)
-        console.log(newRows);
+        const newRows = await _.filter(rows, (row, n) => n !== i)
         setRows(newRows);
     }
 
@@ -77,14 +72,14 @@ const NewBracket = () => {
                 className="form-control"
                 id="genre"
                 value={rows[i].genres}
-                onChange={(e) => handleChange(i, {genre: e.target.value})}
+                onChange={(e) => handleChange(i, {genres: e.target.value})}
             />
             <input
                 placeholder={'Platform'}
                 className="form-control"
                 id="platform"
                 value={rows[i].platforms}
-                onChange={(e) => handleChange(i, {platform: e.target.value})}
+                onChange={(e) => handleChange(i, {platforms: e.target.value})}
             />
             <input
                 placeholder={'Year'}
@@ -94,8 +89,8 @@ const NewBracket = () => {
                 onChange={(e) => handleChange(i, {year: e.target.value})}
             />
             <input
-                type="btn"
-                value="×️"
+                type="button"
+                value="×"
                 className="btn btn-primary"
                 id="delete-row"
                 onClick={() => {
@@ -112,13 +107,13 @@ const NewBracket = () => {
             <h1>Create a Bracket</h1>
             <div className="form-buttons">
                 <input
-                    type="btn"
+                    type="button"
                     value="Add row"
                     onClick={addClick}
                     className="btn btn-primary"
                 />
                 <input
-                    type="btn"
+                    type="button"
                     value="Generate Bracket"
                     className="btn btn-primary"
                     onClick={handleSubmit}
