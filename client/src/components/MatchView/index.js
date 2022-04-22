@@ -48,7 +48,8 @@ const MatchView = (props) => {
                         participant={props.matchParticipants ? props.matchParticipants.top.participant : emptyTeam}>
                         {props.votingRound === props.roundId && props.matchParticipants.top.participant.name === "" ? (<div className="participant-bye"/>) : (<>
                             <div className="participant-vote-button" onClick={() => voteForParticipant("top")}>
-                                {vote != null ? (<div
+                                {vote != null || props.votingRound > props.roundId
+                                    ? (<div
                                     className="participant-score">{props.matchParticipants ? props.matchParticipants.top.voters.length : 0}</div>) : (<>
                                     {props.votingRound === props.roundId ?
                                         <div className="participant-vote">🔷</div> : ""}</>)}
@@ -66,7 +67,7 @@ const MatchView = (props) => {
                         {props.votingRound === props.roundId && props.matchParticipants.bottom.participant.name === "" ? "" : (
                             <>
                                 <div className="participant-vote-button" onClick={() => voteForParticipant("bottom")}>
-                                    {vote != null ? (<div
+                                    {vote != null || props.votingRound > props.roundId ? (<div
                                         className="participant-score">{props.matchParticipants ? props.matchParticipants.bottom.voters.length : 0}</div>) : (<>
                                         {props.votingRound === props.roundId ?
                                             <div className="participant-vote">🔷</div> : ""}</>)}
