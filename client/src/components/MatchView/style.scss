@@ -34,15 +34,13 @@
       border-top: 5px solid black;
     }
   }
-    :nth-child(3n) {
-      background: #445566;
-    }
+
+  :nth-child(3n) {
+    background: #445566;
+  }
 }
+
 .participants {
-  //display: flex;
-  //flex-direction: column;
-  //align-items: flex-end;
-  //flex: 0 1 auto;
   cursor: default;
   overflow: hidden;
 
@@ -68,11 +66,96 @@
       left: -1.3em;
       bottom: 49%;
       content: '';
-      width: 1.3em;
       height: 51%;
+      width: 1.3em;
       border-left: 5px solid black;
       border-bottom: 5px solid black;
       border-bottom-left-radius: .5em;
+    }
+  }
+}
+
+.round:nth-child(3) {
+  .participants {
+    @media only screen and (min-width: 700px) {
+      &::after { // Line to feeder game, team 1
+        height: 102%;
+      }
+      &::before { // Line to feeder game, team 2
+        height: 102%;
+      }
+    }
+  }
+}
+.round:nth-child(4) {
+  .participants {
+    @media only screen and (min-width: 700px) {
+      &::after { // Line to feeder game, team 1
+        height: 204%;
+      }
+      &::before { // Line to feeder game, team 2
+        height: 204%;
+      }
+    }
+  }
+}
+.round:nth-child(5) {
+  .participants {
+    @media only screen and (min-width: 700px) {
+      &::after { // Line to feeder game, team 1
+        height: 408%;
+      }
+      &::before { // Line to feeder game, team 2
+        height: 408%;
+      }
+    }
+  }
+}
+.round:nth-child(6) {
+  .participants {
+    @media only screen and (min-width: 700px) {
+      &::after { // Line to feeder game, team 1
+        height: 820%;
+      }
+      &::before { // Line to feeder game, team 2
+        height: 820%;
+      }
+    }
+  }
+}
+.round:nth-child(7) {
+  .participants {
+    @media only screen and (min-width: 700px) {
+      &::after { // Line to feeder game, team 1
+        height: 1640%;
+      }
+      &::before { // Line to feeder game, team 2
+        height: 1640%;
+      }
+    }
+  }
+}
+.round:nth-child(8) {
+  .participants {
+    @media only screen and (min-width: 700px) {
+      &::after { // Line to feeder game, team 1
+        height: 3280%;
+      }
+      &::before { // Line to feeder game, team 2
+        height: 3280%;
+      }
+    }
+  }
+}
+.round:nth-child(9) {
+  .participants {
+    @media only screen and (min-width: 700px) {
+      &::after { // Line to feeder game, team 1
+        height: 6560%;
+      }
+      &::before { // Line to feeder game, team 2
+        height: 6560%;
+      }
     }
   }
 }

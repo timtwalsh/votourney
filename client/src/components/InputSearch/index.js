@@ -12,13 +12,14 @@ const InputSearch = (props) => {
 
     const handleSearchResultClick = (data) => {
         setSearchResponse(null);
+        props.setIsSearching(false);
+        props.setIsManual(true);
         props.handleSelectResult(data, props.rowId)
         setSearchValue(data.name);
     }
 
     const requestGameData = async (searchText) => {
         if (searchText) {
-            props.setIsSearching(true);
             let response = await fetch(`${apiBaseAddress}/game/search/${searchText}`, {
                 method: "GET",
             })
@@ -37,9 +38,10 @@ const InputSearch = (props) => {
             debouncedRequestGameData(newInput);
         }
     }
-
     return (<div className="form-search-input">
-            {props.isSearching ? (<div className={"loading"}>Loading</div>) : ""}
+            {props.isSearching ? (<div className="loading">
+                <div></div>
+            </div>) : ""}
             <input
                 placeholder={'Name'}
                 className="form-control"
@@ -56,17 +58,12 @@ const InputSearch = (props) => {
                         type="button"
                         value="Manual Entry"
                         className="btn btn-primary search-result-close"
-                        onClick={() => {
-                            setSearchResponse(null);
-                            props.setIsSearching(false);
-                            props.setIsManual(true);
-                            handleSearchResultClick({
+                        onClick={()=> handleSearchResultClick({
                                 name: searchValue,
                                 genres: '',
                                 platforms: '',
                                 year: ''
-                            })
-                        }}
+                            })}
                     />
                 </> : ""}
             </div>

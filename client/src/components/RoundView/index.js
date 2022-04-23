@@ -16,10 +16,13 @@ const RoundSection = (props) => {
             </div>
             <div className="round-container">
                 {props.roundData.map((teams, index) => {
-                    return <MatchView votingRound={props.votingRound} roundId={props.roundId}
-                                      matchId={index} matchParticipants={teams} key={index}
-                                      bracketId={props.bracketId}
-                                      updateHook={props.updateHook}/>;
+                    return <>
+                        {props.roundId === "0" || props.roundId === String(props.totalRounds-1) ? "" : ""}
+                        <MatchView votingRound={props.votingRound} roundId={props.roundId}
+                                   matchId={index} matchParticipants={teams} key={index}
+                                   bracketId={props.bracketId}
+                                   updateHook={props.updateHook}/>
+                    </>;
                 })}
             </div>
         </div>
