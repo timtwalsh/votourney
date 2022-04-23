@@ -24,3 +24,31 @@
 .search-result-close{
   margin: .5em 0 0 .33em;
 }
+
+.loading {
+  position: absolute;
+  background: #33afff;
+  color: #fff;
+}
+
+.loading div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 5em;
+  height: 5em;
+  margin: 1em;
+  border: 1em solid #33aaff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #33aaff transparent transparent transparent;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

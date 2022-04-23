@@ -81,7 +81,7 @@ const BracketView = () => {
         setTimeout(function () {
             getBracketData(bracketId);
             timeout();
-        }, 10000);
+        }, 30000);
     }
 
     useEffect(() => {
@@ -90,8 +90,7 @@ const BracketView = () => {
     }, [bracketId]);
 
     if (isLoading) {
-        return (<div className="loading">
-            <span>Loading...</span>
+        return (<div className="loading"><div></div>
         </div>)
     } else {
         return (<>
