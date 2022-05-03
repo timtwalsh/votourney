@@ -14,7 +14,7 @@ const apiBaseAddress = process.env.REACT_APP_BASE_API_URL;
 const BracketView = () => {
     const params = useParams();
     const bracketId = params?.bracketId;
-    const roundView = params?.roundId;
+    const roundView = params?.roundId || 2;
     let roundsDefault = {
         "0": [{
             name: 'None', genres: 'None', platforms: 'None', year: '1900'
