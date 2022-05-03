@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 import Cookies from "universal-cookie";
 import * as React from "react";
 import Navbar from "../NavBar";
+import {toNumber} from "lodash";
 
 const cookies = new Cookies();
 const apiBaseAddress = process.env.REACT_APP_BASE_API_URL;
@@ -13,6 +14,7 @@ const apiBaseAddress = process.env.REACT_APP_BASE_API_URL;
 const BracketView = () => {
     const params = useParams();
     const bracketId = params?.bracketId;
+    const roundView = params?.roundId;
     let roundsDefault = {
         "0": [{
             name: 'None', genres: 'None', platforms: 'None', year: '1900'
@@ -40,6 +42,10 @@ const BracketView = () => {
     };
     const updateBracketData = async (data) => {
         if (data) setRounds(data)
+        if (roundView > 1) {
+            console.log(roundView);
+            setRounds(data.slice(roundView-2))
+        }
     }
 
     const handleNextRound = async () => {
@@ -100,7 +106,7 @@ const BracketView = () => {
                     updateHook={updateBracketData}
                     bracketId={bracketId}
                     votingRound={currentRound}
-                    roundId={roundId}
+                    roundId={toNumber(roundId)+toNumber(roundView-2)}
                     roundData={rounds[index.toString()]}
                     key={index}
                 />)}

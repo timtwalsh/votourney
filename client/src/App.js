@@ -29,6 +29,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Index/>}/>
                 <Route path="/bracket/new" element={<NewBracket/>}/>
+                <Route path="/bracket/view/:bracketId/:roundId" element={<BracketView/>}/>
                 <Route path="/bracket/view/:bracketId" element={<BracketView/>}/>
             </Routes>
         </div>
