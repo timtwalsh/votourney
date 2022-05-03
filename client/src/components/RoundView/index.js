@@ -12,7 +12,7 @@ const RoundSection = (props) => {
     return (
         <div className="round">
             <div className={roundClass}>
-                <div className="round-title">Round {toNumber(props.roundId) + 1}</div>
+                <div className="round-title">Round {toNumber(props.roundLabel) + 1}</div>
             </div>
             <div className="round-container">
                 {props.roundData.map((teams, index) => {
