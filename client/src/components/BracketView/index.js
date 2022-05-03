@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import './style.scss'
 import RoundSection from "../RoundView";
-import {useParams} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
 import Cookies from "universal-cookie";
 import * as React from "react";
 import Navbar from "../NavBar";
@@ -14,7 +14,8 @@ const apiBaseAddress = process.env.REACT_APP_BASE_API_URL;
 const BracketView = () => {
     const params = useParams();
     const bracketId = params?.bracketId;
-    const roundView = params?.roundId || 2;
+    const isMounted = useRef();
+    let roundView = toNumber(params?.roundId) || 2;
     let roundsDefault = {
         "0": [{
             name: 'None', genres: 'None', platforms: 'None', year: '1900'
@@ -44,7 +45,7 @@ const BracketView = () => {
         if (data) setRounds(data)
         if (roundView > 1) {
             console.log(roundView);
-            setRounds(data.slice(roundView-2))
+            setRounds(data.slice(roundView - 2))
         }
     }
 
@@ -70,16 +71,17 @@ const BracketView = () => {
         return (<>
             <Navbar/>
             <div className="tournament-nav">
-            <input
-                type="button"
-                value={currentRound === -1 ? "Start Tournament" : (currentRound === rounds.length-1 ? "End Tournament" : "Next Round")}
-                className="btn btn-primary"
-                id="startRound"
-                onClick={() => {
-                    handleNextRound()
-                }}
-            />
-        </div></>)
+                <input
+                    type="button"
+                    value={currentRound === -1 ? "Start Tournament" : (currentRound === rounds.length - 1 ? "End Tournament" : "Next Round")}
+                    className="btn btn-primary"
+                    id="startRound"
+                    onClick={() => {
+                        handleNextRound()
+                    }}
+                />
+            </div>
+        </>)
     }
 
     // Keep the data up to date
@@ -91,23 +93,41 @@ const BracketView = () => {
     }
 
     useEffect(() => {
-        getBracketData(bracketId ? bracketId : "06f3884d-8b33-45d7-bb59-d9e187281845").then(() => setIsLoading(false))
-        timeout();
-    }, [bracketId]);
+        if (!isMounted.current) {
+            getBracketData(bracketId ? bracketId : "06f3884d-8b33-45d7-bb59-d9e187281845").then(() => setIsLoading(false))
+            timeout();
+            isMounted.current = true;
+        } else {
+            // do componentDidUpdate logic
+        }
+    });
 
     if (isLoading) {
-        return (<div className="loading"><div></div>
+        return (<div className="loading">
+            <div></div>
         </div>)
     } else {
         return (<>
             {admin ? navButton() : ""}
+            {roundView > 2 ? <>
+                    <ul>
+                    <li className="nav-item">
+                        <input
+                            type="button"
+                            value="◄ View Full Bracket"
+                            className="btn btn-primary"
+                            id="viewFullBracket"
+                            onClick={() => {window.location.href = "/bracket/view/"+bracketId}}/>
+                    </li>
+                    </ul>
+            </> : ""}
             <div className="tournament-bracket">
                 {Object.keys(rounds).map((roundId, index) => <RoundSection
                     updateHook={updateBracketData}
                     bracketId={bracketId}
                     votingRound={currentRound}
-                    roundOffset={roundView-2}
-                    roundId={String(toNumber(roundId)+toNumber(roundView-2))}
+                    roundOffset={roundView - 2}
+                    roundId={String(toNumber(roundId) + toNumber(roundView - 2))}
                     roundData={rounds[index.toString()]}
                     key={index}
                 />)}
