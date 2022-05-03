@@ -12,13 +12,14 @@ const RoundSection = (props) => {
     return (
         <div className="round">
             <div className={roundClass}>
-                <div className="round-title">Round {toNumber(props.roundLabel) + 1}</div>
+                <div className="round-title">Round {toNumber(props.roundId) + 1}</div>
             </div>
             <div className="round-container">
                 {props.roundData.map((teams, index) => {
                     return <>
                         {props.roundId === "0" || props.roundId === String(props.totalRounds-1) ? "" : ""}
-                        <MatchView votingRound={props.votingRound} roundId={props.roundId}
+                        <MatchView votingRound={props.votingRound}
+                                   roundId={props.roundId}
                                    matchId={index} matchParticipants={teams} key={index}
                                    bracketId={props.bracketId}
                                    updateHook={props.updateHook}/>

@@ -106,8 +106,8 @@ const BracketView = () => {
                     updateHook={updateBracketData}
                     bracketId={bracketId}
                     votingRound={currentRound}
-                    roundLabel={toNumber(roundId)+toNumber(roundView-2)}
-                    roundId={roundId}
+                    roundOffset={roundView-2}
+                    roundId={String(toNumber(roundId)+toNumber(roundView-2))}
                     roundData={rounds[index.toString()]}
                     key={index}
                 />)}
