@@ -14,13 +14,13 @@
   overflow-wrap: anywhere;
   height: 2.5em;
   display: flex;
-  align-items: center;
   padding-left: 0.25em;
-  flex-wrap: wrap;
   max-height: 50%;
   overflow: hidden;
   margin-right: 0.5em;
   margin-left: 0.5em;
-  flex-direction: row-reverse;
+  flex-direction: row;
   text-align: right;
+  align-items: center;
+  justify-content: flex-end;
 }

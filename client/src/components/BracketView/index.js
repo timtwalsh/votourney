@@ -18,7 +18,7 @@ const BracketView = () => {
     let roundView = toNumber(params?.roundId) || 2;
     let roundsDefault = {
         "0": [{
-            name: 'None', genres: 'None', platforms: 'None', year: '1900'
+            name: 'None', desc: 'None', art: 'None', year: '1900', url: ''
         }]
     }
     const [rounds, setRounds] = useState(roundsDefault);
@@ -44,7 +44,6 @@ const BracketView = () => {
     const updateBracketData = async (data) => {
         if (data) setRounds(data)
         if (roundView > 1) {
-            console.log(roundView);
             setRounds(data.slice(roundView - 2))
         }
     }
@@ -110,7 +109,7 @@ const BracketView = () => {
         return (<>
             {admin ? navButton() : ""}
             {roundView > 2 ? <>
-                    <ul>
+                    <ul style="padding: 0">
                     <li className="nav-item">
                         <input
                             type="button"

@@ -13,7 +13,6 @@ const InputSearch = (props) => {
     const handleSearchResultClick = (data) => {
         setSearchResponse(null);
         props.setIsSearching(false);
-        props.setIsManual(true);
         props.handleSelectResult(data, props.rowId)
         setSearchValue(data.name);
     }

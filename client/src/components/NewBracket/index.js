@@ -10,16 +10,14 @@ const cookies = new Cookies();
 const apiBaseAddress = process.env.REACT_APP_BASE_API_URL;
 
 const NewBracket = () => {
-    const emptyRow = {name: '', genres: '', platforms: '', year: ''};
+    const emptyRow = {name: '', year: '', desc: '', art:'', url: ''};
     const [rows, setRows] = useState([emptyRow]);
     const [isSearching, setIsSearching] = useState(false);
-    const [isManual, setIsManual] = useState(false);
     const defaultSearchValue = '';
 
     const handleSelectResult = async (data, row) => {
         setIsSearching(false)
         let rowData = [...rows];
-        if (data.genres !== "" && data.year !== "" && data.platforms === "") data.platforms = "PC or Mobile"
         rowData[row] = data;
         await setRows(rowData);
     }
@@ -27,7 +25,6 @@ const NewBracket = () => {
     const inputSearchProps = {
         isSearching,
         setIsSearching,
-        setIsManual,
         handleSelectResult,
     }
 
@@ -68,25 +65,11 @@ const NewBracket = () => {
             <InputSearch rowId={i + element.name} {...inputSearchProps}
                          searchValue={rows[i].name || defaultSearchValue}/>
             <input
-                placeholder={'Genre'}
+                placeholder={'Description'}
                 className="form-control"
-                id="genre"
-                value={rows[i].genres}
-                onChange={(e) => handleChange(i, {genres: e.target.value})}
-            />
-            <input
-                placeholder={'Platform'}
-                className="form-control"
-                id="platform"
-                value={rows[i].platforms}
-                onChange={(e) => handleChange(i, {platforms: e.target.value})}
-            />
-            <input
-                placeholder={'Year'}
-                className="form-control"
-                id="year"
-                value={rows[i].year}
-                onChange={(e) => handleChange(i, {year: e.target.value})}
+                id="desc"
+                value={rows[i].desc}
+                onChange={(e) => handleChange(i, {desc: e.target.value})}
             />
             <input
                 type="button"

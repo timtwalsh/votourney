@@ -8,10 +8,10 @@ const genre_map = require("./genre_data.json");
 const SearchResultView = (props) => {
     const getFullYear = (secondsFromEpoch) => {
         if (secondsFromEpoch) {
-            const date = new Date(1000 * secondsFromEpoch);
+            const date = new Date(1000 * toNumber(secondsFromEpoch));
             return String(date.getFullYear());
         }
-        return "----"
+        return "1900"
     }
 
     const getGenreNames = (genreIds) => {
@@ -41,27 +41,26 @@ const SearchResultView = (props) => {
     return (
         <>
             {props.data.map((searchRowData, searchIndex) => {
-                    return (
-                        <div className={"search-result"} key={searchIndex}
-                             onClick={() => props.handleSearchResultClick({
-                                 name: searchRowData.name,
-                                 genres: getGenreNames(searchRowData.genres),
-                                 platforms: getPlatformNames(searchRowData.platforms),
-                                 year: getFullYear(toNumber(searchRowData.first_release_date))
-                             }, searchIndex)}>
-                            <div className={"search-result-left"}>
-                                <div className={"result_name"}>{searchRowData.name}</div>
-                                <div
-                                    className={"result_platforms" + searchIndex}>{searchRowData.platforms ? getPlatformNames(searchRowData.platforms) : "----"}</div>
+                    return (<>
+                            <div className={"search-result"} key={searchIndex}
+                                 onClick={() => props.handleSearchResultClick({
+                                     name: searchRowData.name,
+                                     year: getFullYear(searchRowData.first_release_date),
+                                     desc: searchRowData.summary,
+                                     art: searchRowData.cover?.image_id,
+                                     url: searchRowData.url
+                                 }, searchIndex)}>
+                                <div className={"search-result-left"}>
+                                    <div className="result_name">{searchRowData.name} ({getFullYear(searchRowData.first_release_date)})</div>
+                                    <div
+                                        className="result_desc">{searchRowData.summary ? searchRowData.summary : "No Desc"}</div>
+                                </div>
+                                <div className={"search-result-right"}>
+                                    <img src={`//images.igdb.com/igdb/image/upload/t_thumb/${searchRowData.cover?.image_id}.png`}/>
+                                </div>
+                                {props.children}
                             </div>
-                            <div className={"search-result-right"}>
-                                <div
-                                    className={"result_released"}>{searchRowData.first_release_date ? getFullYear(Number(searchRowData.first_release_date)) : "----"}</div>
-                                <div
-                                    className={"result_genres"}>{searchRowData.genres ? getGenreNames(searchRowData.genres) : "----"}</div>
-                            </div>
-                            {props.children}
-                        </div>
+                        </>
                     )
                 }
             )}

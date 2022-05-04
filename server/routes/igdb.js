@@ -9,7 +9,7 @@ const twitchBearerUrl = `https://id.twitch.tv/oauth2/token?client_id=${process.e
 routes.route("/api/game/search/:lookup").get(async (req, res) => {
     const {data} = await axios.post(twitchBearerUrl);
     const response = await igdb(process.env.TWITCH_CLIENT_ID, data.access_token)
-        .fields('name, platforms, first_release_date, genres')
+        .fields('name, first_release_date, cover.image_id, summary, url')
         .limit(10)
         .search(`${req.params.lookup}`)
         .request('/games')

@@ -30,7 +30,14 @@
   background: #33afff;
   color: #fff;
 }
-
+.result_name{
+  font-weight: 700;
+}
+.result_desc {
+  font-weight: 300;
+  height: 4.5em;
+  overflow: hidden;
+}
 .loading div {
   box-sizing: border-box;
   display: block;
