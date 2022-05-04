@@ -11,8 +11,8 @@ const ParticipantView = (props) => {
     };
     if (props.participant)
         return (
-        <div className="participant" onClick={handleClick}>
-           <div className="participant-name" onMouseEnter={() => {props.participant.name && setDisplayTooltip(true)}} onMouseLeave={() => setDisplayTooltip(false)}>
+        <div className="participant">
+           <div className="participant-name" onClick={handleClick} onMouseEnter={() => {props.participant.name && setDisplayTooltip(true)}} onMouseLeave={() => setDisplayTooltip(false)}>
                {props.participant.name}{props.participant && displayTooltip ? <TooltipView participant={props.participant} /> : ""}</div>
             {props.children}
         </div>
