@@ -109,7 +109,7 @@ const BracketView = () => {
         return (<>
             {admin ? navButton() : ""}
             {roundView > 2 ? <>
-                    <ul style="padding: 0">
+                    <ul style={{padding: 0}}>
                     <li className="nav-item">
                         <input
                             type="button"
